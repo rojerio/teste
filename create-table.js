@@ -1,11 +1,11 @@
 import { sql } from './db.js'
 
 sql`
-  CREATE TABLE books (
+  CREATE TABLE livros (
       id text PRIMARY KEY,
-      name character varying(255),
-      author character varying(255),
-      genre character varying(255)
+      nome character varying(255),
+      autor character varying(255),
+      ano character varying(255)
   );
 `.then(() => {
   console.log('tabela criada');

@@ -2,37 +2,37 @@ import { randomUUID } from "crypto";
 import { sql } from './db.js';
 
 export class DatabasePostgres { 
-  async listBooks() {
-    const books = await sql`select * from books`;
-    return books;
+  async listLivros() {
+    const livros = await sql`select * from livros`;
+    return livros;
   }
 
-  async createBook(book) {
+  async createLivro(livro) {
     const id = randomUUID();
     console.log('id', id);
-    const name = book.name;
-    const author = book.author;
-    const genre = book.genre;
+    const nome = livro.nome;
+    const autor = livro.autor;
+    const ano = livro.ano;
     
-    await sql`insert into books (id, name, author, genre)
-    values (${id}, ${name}, ${author}, ${genre})`
+    await sql`insert into livros (id, nome, autor, ano)
+    values (${id}, ${nome}, ${autor}, ${ano})`
   }
 
-  async updateBook(id, book) {
-    const name = book.name;
-    const author = book.author;
-    const genre = book.genre;
+  async updateLivro(id, livro) {
+    const nome = livro.nome;
+    const autor = livro.autor;
+    const ano = livro.ano;
 
-    await sql`update books set 
-        name = ${name},
-        author = ${author},
-        genre = ${genre}
+    await sql`update livros set 
+        nome = ${nome},
+        autor = ${autor},
+        ano = ${ano}
         where id = ${id}
     `;
   }
 
-  async deleteBook(id) {
-    await sql`delete from books where id = ${id}`
+  async deleteLivro(id) {
+    await sql`delete from livros where id = ${id}`
   }
 
 }

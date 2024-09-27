@@ -14,45 +14,41 @@ server.register(cors, {
 // ENDPOINTS (CRUD):
 
 // CREATE
-server.post('/books', async (request, reply) => {
+server.post('/livros', async (request, reply) => {
     const body = request.body;
-    await databasePostgres.createBook(body);
+    await databasePostgres.createLivro(body);
     return reply.status(201).send();
 });
 
-// READ (Get all books)
-server.get('/books', async () => {
-    const books = await databasePostgres.listBooks();
-    return books;
+// READ (Get all livros)
+server.get('/livros', async () => {
+    const livros = await databasePostgres.listLivros();
+    return livros;
 });
 
-// READ (Get a specific book by ID)
-server.get('/books/:id', async (request, reply) => {
-    const bookID = request.params.id;
-    const book = await databasePostgres.getBookById(bookID);
-    if (!book) {
-        return reply.status(404).send({ error: 'Book not found' });
+// READ (Get a specific livro by ID)
+server.get('/livros/:id', async (request, reply) => {
+    const livroID = request.params.id;
+    const livro = await databasePostgres.getlivroById(livroID);
+    if (!livro) {
+        return reply.status(404).send({ error: 'livro not found' });
     }
-    return book;
+    return livro;
 });
 
 // UPDATE
-server.put('/books/:id', async (request, reply) => {
-    const bookID = request.params.id;
+server.put('/livros/:id', async (request, reply) => {
+    const livroID = request.params.id;
     const body = request.body;
-    await databasePostgres.updateBook(bookID, body);
+    await databasePostgres.updateLivro(livroID, body);
    
     return reply.status(204).send();
 });
 
 // DELETE
-server.delete('/books/:id', async (request, reply) => {
-    const bookID = request.params.id;
-    const deleted = await databasePostgres.deleteBook(bookID);
-
-    if (!deleted) {
-        return reply.status(404).send({ error: 'Book not found' });
-    }
+server.delete('/livros/:id', async (request, reply) => {
+    const livroID = request.params.id;
+    const deleted = await databasePostgres.deleteLivro(livroID);
 
     return reply.status(204).send();
 });
